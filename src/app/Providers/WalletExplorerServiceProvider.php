@@ -33,6 +33,8 @@ class WalletExplorerServiceProvider extends ServiceProvider
             $config => config_path('walletexplorer.php')
 
         ]);
+
+        $this->mergeConfigFrom($config, 'walletexplorer');
         
     }
 
