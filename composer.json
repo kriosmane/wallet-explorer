@@ -1,0 +1,22 @@
+{
+    "name": "krios-mane/wallet-explorer",
+    "description": "Simple package for interacting with commons crypto wallet explorer",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Krios Mane",
+            "email": "krios.mane@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "KriosMane\\WalletExplorer\\" : "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.1",
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
