@@ -1,5 +1,5 @@
 {
-    "name": "krios-mane/wallet-explorer",
+    "name": "kriosmane/wallet-explorer",
     "description": "Simple package for interacting with commons crypto wallet explorer",
     "type": "library",
     "license": "MIT",
@@ -20,5 +20,6 @@
         "guzzlehttp/guzzle": "^6.3",
         "graze/guzzle-jsonrpc": "~3.0",
         "fabpot/goutte": "^3.2"
-    }
+    },
+    "prefer-stable": false
 }
