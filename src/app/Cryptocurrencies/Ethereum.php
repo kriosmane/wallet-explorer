@@ -3,7 +3,7 @@
 
 namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
 
-class EthereumClassic extends Crypto {
+class Ethereum extends Crypto {
 
     /**
      * 
@@ -18,7 +18,7 @@ class EthereumClassic extends Crypto {
     /**
      * 
      */
-    protected $url = 'https://api.gastracker.io/addr/%s';
+    protected $url = 'https://api.etherscan.io/api?module=account&action=balance&address=%s&tag=latest&apikey=';
 
     /**
      * {@inheritdoc}
@@ -26,6 +26,9 @@ class EthereumClassic extends Crypto {
     public function handle($arguments)
     {
         
+        $api_key = config('walletexplorer.keys.etherscan');
+
+        $this->url = $this->url.$api_key;
 
         $response = $this->call($arguments);
 
@@ -37,7 +40,15 @@ class EthereumClassic extends Crypto {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
-        $this->explorer_response->setBalance($response['balance']['ether']);
+        $received = ($response['result']);
+
+        $decimals = 18;
+
+        $shift = strlen($received) - $decimals;
+
+        $received =  substr($received, 0, $shift).'.'.substr($received, $shift);
+
+        $this->explorer_response->setBalance($received);
 
         return $this->explorer_response;
 

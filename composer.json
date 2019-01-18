@@ -17,6 +17,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^7.1",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "graze/guzzle-jsonrpc": "~3.0",
+        "fabpot/goutte": "^3.2"
     }
 }

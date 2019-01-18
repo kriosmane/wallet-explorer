@@ -6,22 +6,22 @@ namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
 
 
 
-class Bitcoin extends Crypto {
+class BitcoinPrivate extends Crypto {
 
     /**
      * 
      */
-    protected $name = 'Bitcoin';
+    protected $name = 'Zcash';
 
     /**
      * 
      */
-    protected $symbol = 'BTC';
+    protected $symbol = 'BTCP';
 
     /**
      * 
      */
-    protected $url = 'https://chain.so/api/v2/get_address_balance/BTC/%s';
+    protected $url = 'https://explorer.btcprivate.org/api/addr/%s/?noTxList=1';
 
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class Bitcoin extends Crypto {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
-        $this->explorer_response->setBalance($response['data']['confirmed_balance']);
+        $this->explorer_response->setBalance($response['balance']);
 
         return $this->explorer_response;
 

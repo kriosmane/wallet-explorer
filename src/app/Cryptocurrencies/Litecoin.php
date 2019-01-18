@@ -6,22 +6,22 @@ namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
 
 
 
-class Bitcoin extends Crypto {
+class Litecoin extends Crypto {
 
     /**
      * 
      */
-    protected $name = 'Bitcoin';
+    protected $name = 'Litecoin';
 
     /**
      * 
      */
-    protected $symbol = 'BTC';
+    protected $symbol = 'LTC';
 
     /**
      * 
      */
-    protected $url = 'https://chain.so/api/v2/get_address_balance/BTC/%s';
+    protected $url = 'https://chain.so/api/v2/get_address_balance/LTC/%s';
 
     /**
      * {@inheritdoc}
@@ -29,7 +29,6 @@ class Bitcoin extends Crypto {
     public function handle($arguments)
     {
         
-
         $response = $this->call($arguments);
 
         if(!$response){

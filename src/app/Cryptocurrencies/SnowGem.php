@@ -6,22 +6,22 @@ namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
 
 
 
-class Bitcoin extends Crypto {
+class SnowGem extends Crypto {
 
     /**
      * 
      */
-    protected $name = 'Bitcoin';
+    protected $name = 'SnowGem';
 
     /**
      * 
      */
-    protected $symbol = 'BTC';
+    protected $symbol = 'XSG';
 
     /**
      * 
      */
-    protected $url = 'https://chain.so/api/v2/get_address_balance/BTC/%s';
+    protected $url = 'https://insight.snowgem.org/api/addr/%s';
 
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class Bitcoin extends Crypto {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
-        $this->explorer_response->setBalance($response['data']['confirmed_balance']);
+        $this->explorer_response->setBalance($response['balance']);
 
         return $this->explorer_response;
 

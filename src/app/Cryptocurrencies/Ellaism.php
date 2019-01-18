@@ -6,22 +6,22 @@ namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
 
 
 
-class Bitcoin extends Crypto {
+class Ellaism extends Crypto {
 
     /**
      * 
      */
-    protected $name = 'Bitcoin';
+    protected $name = 'Ellaism';
 
     /**
      * 
      */
-    protected $symbol = 'BTC';
+    protected $symbol = 'ELLA';
 
     /**
      * 
      */
-    protected $url = 'https://chain.so/api/v2/get_address_balance/BTC/%s';
+    protected $url = 'https://explorer.ellaism.org/account/%s';
 
     /**
      * {@inheritdoc}
@@ -29,18 +29,19 @@ class Bitcoin extends Crypto {
     public function handle($arguments)
     {
         
-
         $response = $this->call($arguments);
 
         if(!$response){
 
-            return $response;
+            return false;
 
         }
 
-        $response = json_decode($response->getBody()->getContents(), true);
+        preg_match("/Balance:<\/td><td>([0-9.]+)/", $response, $matches);
 
-        $this->explorer_response->setBalance($response['data']['confirmed_balance']);
+        $balance = isset($matches[1]) ? $matches[1] : 0;
+
+        $this->explorer_response->setBalance($balance);
 
         return $this->explorer_response;
 

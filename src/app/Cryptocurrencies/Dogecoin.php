@@ -6,22 +6,22 @@ namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
 
 
 
-class Bitcoin extends Crypto {
+class Dogecoin extends Crypto {
 
     /**
      * 
      */
-    protected $name = 'Bitcoin';
+    protected $name = 'Dogecoin';
 
     /**
      * 
      */
-    protected $symbol = 'BTC';
+    protected $symbol = 'DOGE';
 
     /**
      * 
      */
-    protected $url = 'https://chain.so/api/v2/get_address_balance/BTC/%s';
+    protected $url = 'https://chain.so/api/v2/get_address_balance/DOGE/%s';
 
     /**
      * {@inheritdoc}

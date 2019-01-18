@@ -4,24 +4,22 @@
 namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
 
 
-
-
-class Bitcoin extends Crypto {
+class Verge extends Crypto {
 
     /**
      * 
      */
-    protected $name = 'Bitcoin';
+    protected $name = 'Verge';
 
     /**
      * 
      */
-    protected $symbol = 'BTC';
+    protected $symbol = 'XVG';
 
     /**
      * 
      */
-    protected $url = 'https://chain.so/api/v2/get_address_balance/BTC/%s';
+    protected $url = 'https://verge-blockchain.info/ext/getaddress/%s';
 
     /**
      * {@inheritdoc}
@@ -40,7 +38,7 @@ class Bitcoin extends Crypto {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
-        $this->explorer_response->setBalance($response['data']['confirmed_balance']);
+        $this->explorer_response->setBalance($response['balance']);
 
         return $this->explorer_response;
 

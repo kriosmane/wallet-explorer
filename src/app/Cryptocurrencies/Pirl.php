@@ -6,22 +6,22 @@ namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
 
 
 
-class Bitcoin extends Crypto {
+class Pirl extends Crypto {
 
     /**
      * 
      */
-    protected $name = 'Bitcoin';
+    protected $name = 'Pirl';
 
     /**
      * 
      */
-    protected $symbol = 'BTC';
+    protected $symbol = 'PIRL';
 
     /**
      * 
      */
-    protected $url = 'https://chain.so/api/v2/get_address_balance/BTC/%s';
+    protected $url = 'http://pirl.minerpool.net/api/accounts/%s';
 
     /**
      * {@inheritdoc}
@@ -40,7 +40,16 @@ class Bitcoin extends Crypto {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
-        $this->explorer_response->setBalance($response['data']['confirmed_balance']);
+
+        $balance = $response['stats']['paid'];
+
+        $decimals = 9;
+
+        $shift = intval(strlen($balance) - $decimals);
+
+        $balance =  substr($balance, 0, -$decimals).'.'.substr($balance, $shift);
+
+        $this->explorer_response->setBalance($balance);
 
         return $this->explorer_response;
 
