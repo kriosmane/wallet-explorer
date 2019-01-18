@@ -27,6 +27,7 @@
             KriosMane\WalletExplorer\app\Cryptocurrencies\Verge::class,
             KriosMane\WalletExplorer\app\Cryptocurrencies\Pirl::class,
             KriosMane\WalletExplorer\app\Cryptocurrencies\Ravencoin::class,
+            KriosMane\WalletExplorer\app\Cryptocurrencies\SnowGem::class,
             KriosMane\WalletExplorer\app\Cryptocurrencies\Zcash::class
 
         ],
