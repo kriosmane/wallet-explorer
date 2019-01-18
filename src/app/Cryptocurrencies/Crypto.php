@@ -39,6 +39,11 @@ abstract class Crypto implements CryptoInterface {
     /**
      * 
      */
+    protected $crawler = '';
+
+    /**
+     * 
+     */
     protected $explorer_response = null;
 
     /**
@@ -148,6 +153,8 @@ abstract class Crypto implements CryptoInterface {
             'base_uri' => $this->url
         
         ]);
+        
+        $this->crawler = new \Goutte\Client();
 
         $this->explorer_response = new ExplorerResponse();
 

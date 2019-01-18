@@ -37,7 +37,7 @@ class Ellaism extends Crypto {
 
         }
 
-        preg_match("/Balance:<\/td><td>([0-9.]+)/", $response, $matches);
+        preg_match("/Balance:<\/td><td>([0-9.]+)/", $response->getBody()->getContents(), $matches);
 
         $balance = isset($matches[1]) ? $matches[1] : 0;
 

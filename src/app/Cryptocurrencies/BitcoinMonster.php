@@ -21,11 +21,6 @@ class BitcoinMonster extends Crypto {
     /**
      * 
      */
-    protected $crawler = null;
-
-    /**
-     * 
-     */
     protected $url = 'https://xmon.blockxplorer.info/address/%s';
 
     /**
@@ -34,12 +29,7 @@ class BitcoinMonster extends Crypto {
     public function handle($arguments)
     {
         
-        $this->crawler = new \Goutte\Client();
-
-        $this->crawler->setClient($this->http_client);
-
         $response = $this->crawler->request('GET', sprintf($this->url, $arguments));
-
 
         /**
          * index 0 TOTAL SENT
