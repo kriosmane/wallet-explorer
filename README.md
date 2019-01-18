@@ -9,7 +9,7 @@ Simple package for interacting with commons crypto wallet explorer
 To get the latest version simply run the code below in your project.
 
 ```
-"composer require krios-mane/wallet-explorer"
+composer require krios-mane/wallet-explorer
 ```
 Once is installed, You need to register the service provider. Open up `config/app.php` and add the following to the `providers` key.
 
