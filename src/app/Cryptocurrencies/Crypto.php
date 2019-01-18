@@ -149,14 +149,15 @@ abstract class Crypto implements CryptoInterface {
     public function __construct() {
 
         $this->http_client = new Client([
-
-            'base_uri' => $this->url,
-
+            
             'verify' => false
         
         ]);
         
         $this->crawler = new \Goutte\Client();
+
+        $this->crawler->setClient($this->http_client);
+
 
         $this->explorer_response = new ExplorerResponse();
 
