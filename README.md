@@ -1,4 +1,4 @@
-# Laravel Wallet Explorer
+# Laravel Crypto Wallet Explorer
 Simple package for interacting with commons crypto wallet explorer
 
 
@@ -13,7 +13,13 @@ To get the latest version simply run the code below in your project.
 ```
 Once is installed, You need to register the service provider. Open up `config/app.php` and add the following to the `providers` key.
 
-* `KriosMane\WalletExplorer\app\Providers\WalletExplorerServiceProvider::class`
+```php
+'providers' => [
+    ...
+    KriosMane\WalletExplorer\app\Providers\WalletExplorerServiceProvider::class,
+    ...
+]
+```
 
 Also, register the Facade like so:
 
@@ -37,11 +43,8 @@ A configuration-file named `walletexpolorer.php` with default settings will be p
 
 
 ## Usage
-
-
-## USING PACKAGE 
-```
 Add the following line to your controller
+```php
 
 use \WalletExplorer;
 
