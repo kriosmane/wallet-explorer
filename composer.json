@@ -3,7 +3,7 @@
     "description": "Simple package for interacting with commons crypto wallet explorer",
     "keywords": ["blockchain", "laravel", "crypto", "wallet", "explorer"],
     "type": "library",
-    "license": "BSD 3-Clause",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Krios Mane",
