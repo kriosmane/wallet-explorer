@@ -150,7 +150,9 @@ abstract class Crypto implements CryptoInterface {
 
         $this->http_client = new Client([
 
-            'base_uri' => $this->url
+            'base_uri' => $this->url,
+
+            'verify' => false
         
         ]);
         
