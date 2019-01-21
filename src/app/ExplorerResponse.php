@@ -13,7 +13,7 @@ class ExplorerResponse {
     /**
      * 
      */
-    protected $balance = '';
+    protected $balance = 0;
 
     /**
      * 

@@ -96,6 +96,7 @@ class WalletExplorer {
 
         }
 
+        return false;
         
     }
 

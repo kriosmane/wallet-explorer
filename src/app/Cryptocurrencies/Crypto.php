@@ -49,6 +49,11 @@ abstract class Crypto implements CryptoInterface {
     /**
      * 
      */
+    protected $balance_path = '';
+
+    /**
+     * 
+     */
     public function setName()
     {
         $this->name = $name;
@@ -172,9 +177,29 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     *  Method ovveridable by single crypto class
      */
-    abstract public function handle($arguments);
+    public function handle($address)
+    {
+
+        $response = $this->call($address);
+        
+        if(!$response){
+
+            return $response;
+
+        }
+
+        $response = json_decode($response->getBody()->getContents(), true);
+
+        if(array_has($response, $this->balance_path)){
+
+            $this->explorer_response->setBalance(array_get($response, $this->balance_path));
+
+        }
+
+        return $this->explorer_response;
+    }
 
     /**
      * 
@@ -188,10 +213,7 @@ abstract class Crypto implements CryptoInterface {
         
         try{
             
-            $request = $this->http_client->request('GET', $endpoint, [
-
-
-            ]);
+            $request = $this->http_client->request('GET', $endpoint, []);
             
             return $request;
         
