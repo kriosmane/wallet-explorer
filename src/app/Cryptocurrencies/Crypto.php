@@ -13,54 +13,68 @@ abstract class Crypto implements CryptoInterface {
 
     /**
      * crypto's name
+     * @var string
      */
     protected $name = '';
 
     /**
      * crypto's symbol
+     * @var string
      */
     protected $symbol = '';
 
     /**
      * crypto's description
+     * @var string
      */
     protected $description = '';
 
     /**
-     * 
+     * Explorer's url
+     * @var string
      */
     protected $url = '';
 
     /**
-     * 
+     * @var GuzzleHttp\Client
      */
     protected $http_client = '';
 
     /**
-     * 
+     * @var \Goutte\Client
      */
     protected $crawler = '';
 
     /**
-     * 
+     * @var KriosMane\WalletExplorer\app\ExplorerResponse
      */
     protected $explorer_response = null;
 
     /**
-     * @var string path where to get balance
+     * Path where to get balance
+     * @var string 
      */
     protected $balance_response_path = '';
 
     /**
-     * 
+     * Describes the SSL certificate verification behavior of a request
+     * @var booleam
      */
-    public function setName()
+    protected $verify = false;
+
+    /**
+     * Set coin's name
+     * @param string $name
+     * @return void
+     */
+    public function setName($name)
     {
         $this->name = $name;
     }
 
     /**
-     * 
+     * Get coin's name
+     * @return string $name
      */
     public function getName()
     {
@@ -68,7 +82,9 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Set coin's symbol
+     * @param string $symbol
+     * @return void
      */
     public function setSymbol($symbol)
     {
@@ -76,7 +92,8 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Get coin's symbol
+     * @return string symbol
      */
     public function getSymbol()
     {
@@ -84,7 +101,9 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Set coin's description 
+     * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {
@@ -92,7 +111,8 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Get coin's description
+     * @return string $description
      */
     public function getDescription()
     {
@@ -100,7 +120,9 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Set coin's explorer url
+     * @param string $url
+     * @return void
      */
     public function setUrl($url)
     {
@@ -108,7 +130,8 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Get coin's explorer url
+     * @return string
      */
     public function getUrl()
     {
@@ -116,7 +139,9 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Set http client object
+     * @param GuzzleHttp\Client $client
+     * @return void
      */
     public function setHttpClient($client)
     {
@@ -124,7 +149,8 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Get http client object
+     * @return GuzzleHttp\Client
      */
     public function getHttpClient()
     {
@@ -132,7 +158,9 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Set explorer response object
+     * @param KriosMane\WalletExplorer\app\ExplorerResponse $response
+     * @return void
      */
     public function setExplorerResponse($response)
     {
@@ -140,30 +168,58 @@ abstract class Crypto implements CryptoInterface {
     }
 
     /**
-     * 
+     * Get explorer response object
+     * @return KriosMane\WalletExplorer\app\ExplorerResponse
      */
     public function getExplorerResponse()
     {
         return $this->explore_response;
     }
 
+    /**
+     * Set verify attribute
+     * @param boolean $verify
+     * @return void
+     */
+    public function setVerify($verify)
+    {
+        $this->verify = $verify;
+    }
+
+    /**
+     * Get verify attribute
+     * @return boolean
+     */
+    public function getVerify()
+    {
+        return $this->verify;
+    }
 
     /**
      * 
      */
     public function __construct() {
 
+        /**
+         * init http client
+         */
         $this->http_client = new Client([
             
-            'verify' => false
+            'verify' => $this->verify
         
         ]);
         
+        /**
+         * init crawler client 
+         * needed for some explorers
+         */
         $this->crawler = new \Goutte\Client();
 
         $this->crawler->setClient($this->http_client);
 
-
+        /**
+         * init explorer response
+         */
         $this->explorer_response = new ExplorerResponse();
 
     }
@@ -171,10 +227,7 @@ abstract class Crypto implements CryptoInterface {
     /**
      * 
      */
-    public function make()
-    {
-
-    }
+    public function make() { }
 
     /**
      *  Method ovveridable by single crypto class
@@ -192,19 +245,27 @@ abstract class Crypto implements CryptoInterface {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
+        /**
+         * look for and set wallet balance
+         */
         if(array_has($response, $this->balance_response_path)){
 
             $this->explorer_response->setBalance(array_get($response, $this->balance_response_path));
 
         }
-
+        
         return $this->explorer_response;
     }
 
     /**
+     * Call coin's explorer web service
+     * @param string $address
+     * @param array $params
+     * @param string $type GET|POST
      * 
+     * @return boolean|response
      */
-    public function call($address)
+    public function call($address, $params = [], $type = 'GET')
     {
 
         $this->explorer_response->setAddress($address);
@@ -213,7 +274,7 @@ abstract class Crypto implements CryptoInterface {
         
         try{
             
-            $request = $this->http_client->request('GET', $endpoint, []);
+            $request = $this->http_client->request($type, $endpoint, $params);
             
             return $request;
         
