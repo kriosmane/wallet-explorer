@@ -22,5 +22,5 @@
         "graze/guzzle-jsonrpc": "~3.0",
         "fabpot/goutte": "^3.2"
     },
-    "prefer-stable": false
+    "prefer-stable": true
 }
