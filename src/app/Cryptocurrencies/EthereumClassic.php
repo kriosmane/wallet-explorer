@@ -23,7 +23,7 @@ class EthereumClassic extends Crypto {
     /**
      * 
      */
-    protected $balance_path = 'balance.ether';
+    protected $balance_response_path = 'balance.ether';
 
 }
 

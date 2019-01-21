@@ -47,9 +47,9 @@ abstract class Crypto implements CryptoInterface {
     protected $explorer_response = null;
 
     /**
-     * 
+     * @var string path where to get balance
      */
-    protected $balance_path = '';
+    protected $balance_response_path = '';
 
     /**
      * 
@@ -192,9 +192,9 @@ abstract class Crypto implements CryptoInterface {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
-        if(array_has($response, $this->balance_path)){
+        if(array_has($response, $this->balance_response_path)){
 
-            $this->explorer_response->setBalance(array_get($response, $this->balance_path));
+            $this->explorer_response->setBalance(array_get($response, $this->balance_response_path));
 
         }
 

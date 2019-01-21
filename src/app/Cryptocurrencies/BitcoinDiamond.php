@@ -26,7 +26,7 @@ class BitcoinDiamond extends Crypto {
     /**
      * 
      */
-    protected $balance_path = 'data.balance';
+    protected $balance_response_path = 'data.balance';
 
 
 }

@@ -26,7 +26,7 @@ class BitcoinPrivate extends Crypto {
     /**
      * 
      */
-    protected $balance_path = 'balance';
+    protected $balance_response_path = 'balance';
 
 
 }
