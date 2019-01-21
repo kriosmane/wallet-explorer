@@ -39,7 +39,7 @@ You can publish the configuration file using this command:
 php artisan vendor:publish --provider="KriosMane\WalletExplorer\app\Providers\WalletExplorerServiceProvider"
 ```
 
-A configuration-file named `walletexpolorer.php` with default settings will be placed in your `config` directory:
+A configuration-file named `walletexpolorer.php` with default settings will be placed in your `config` directory
 
 
 ## Usage
