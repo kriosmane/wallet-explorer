@@ -16,7 +16,7 @@ Once is installed, You need to register the service provider. Open up `config/ap
 ```php
 'providers' => [
     ...
-    KriosMane\WalletExplorer\app\Providers\WalletExplorerServiceProvider::class,
+    KriosMane\WalletExplorer\Providers\WalletExplorerServiceProvider::class,
     ...
 ]
 ```
@@ -26,7 +26,7 @@ Also, register the Facade like so:
 ```php
 'aliases' => [
     ...
-    'WalletExplorer' => KriosMane\WalletExplorer\app\Facades\WalletExplorer::class,
+    'WalletExplorer' => KriosMane\WalletExplorer\Facades\WalletExplorer::class,
     ...
 ]
 ```
@@ -36,7 +36,7 @@ Also, register the Facade like so:
 You can publish the configuration file using this command:
 
 ```bash
-php artisan vendor:publish --provider="KriosMane\WalletExplorer\app\Providers\WalletExplorerServiceProvider"
+php artisan vendor:publish --provider="KriosMane\WalletExplorer\Providers\WalletExplorerServiceProvider"
 ```
 
 A configuration-file named `walletexpolorer.php` with default settings will be placed in your `config` directory
