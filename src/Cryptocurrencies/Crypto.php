@@ -1,7 +1,8 @@
 <?php
 
-namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
-use KriosMane\WalletExplorer\app\ExplorerResponse;
+namespace KriosMane\WalletExplorer\Cryptocurrencies;
+
+use KriosMane\WalletExplorer\ExplorerResponse;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -46,7 +47,7 @@ abstract class Crypto implements CryptoInterface {
     protected $crawler = '';
 
     /**
-     * @var KriosMane\WalletExplorer\app\ExplorerResponse
+     * @var KriosMane\WalletExplorer\ExplorerResponse
      */
     protected $explorer_response = null;
 
@@ -159,7 +160,7 @@ abstract class Crypto implements CryptoInterface {
 
     /**
      * Set explorer response object
-     * @param KriosMane\WalletExplorer\app\ExplorerResponse $response
+     * @param KriosMane\WalletExplorer\ExplorerResponse $response
      * @return void
      */
     public function setExplorerResponse($response)
@@ -169,7 +170,7 @@ abstract class Crypto implements CryptoInterface {
 
     /**
      * Get explorer response object
-     * @return KriosMane\WalletExplorer\app\ExplorerResponse
+     * @return KriosMane\WalletExplorer\ExplorerResponse
      */
     public function getExplorerResponse()
     {

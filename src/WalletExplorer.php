@@ -1,11 +1,11 @@
 <?php
 
-namespace KriosMane\WalletExplorer\app;
+namespace KriosMane\WalletExplorer;
 
 use Illuminate\Contracts\Container\Container;
 
-use KriosMane\WalletExplorer\app\Cryptocurrencies\CryptoBus;
-use KriosMane\WalletExplorer\app\Cryptocurrencies\CryptoInterface;
+use KriosMane\WalletExplorer\Cryptocurrencies\CryptoBus;
+use KriosMane\WalletExplorer\Cryptocurrencies\CryptoInterface;
 
 class WalletExplorer {
 

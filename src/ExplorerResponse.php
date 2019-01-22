@@ -1,6 +1,6 @@
 <?php
 
-namespace KriosMane\WalletExplorer\app;
+namespace KriosMane\WalletExplorer;
 
 
 class ExplorerResponse {

@@ -1,6 +1,6 @@
 <?php
 
-namespace KriosMane\WalletExplorer\app\Facades;
+namespace KriosMane\WalletExplorer\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
+namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
 class EthereumClassic extends Crypto {
 

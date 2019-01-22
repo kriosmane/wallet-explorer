@@ -1,9 +1,10 @@
 <?php
 
-namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
+namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
-use KriosMane\WalletExplorer\app\WalletExplorer;
-use KriosMane\WalletExplorer\app\Exceptions\WalletExplorerSDKException;
+use KriosMane\WalletExplorer\WalletExplorer;
+
+use KriosMane\WalletExplorer\Exceptions\WalletExplorerSDKException;
 
 /**
  * 
@@ -101,7 +102,7 @@ class CryptoBus {
         throw new WalletExplorerSDKException(
 
             sprintf(
-                'Crypto class "%s" should be an instance of "KriosMane\WalletExplorer\app\Crypto\CryptoInterface"',
+                'Crypto class "%s" should be an instance of "KriosMane\WalletExplorer\Crypto\CryptoInterface"',
                 get_class($crypto)
             )
         );   

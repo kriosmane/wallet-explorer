@@ -1,6 +1,6 @@
 <?php
 
-namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
+namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
 /**
  * Interface CryptoInterface.

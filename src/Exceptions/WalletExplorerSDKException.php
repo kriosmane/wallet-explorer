@@ -1,6 +1,6 @@
 <?php
 
-namespace KriosMane\WalletExplorer\app\Exceptions;
+namespace KriosMane\WalletExplorer\Exceptions;
 
 /**
  * Class WalletExplorerSDKException.

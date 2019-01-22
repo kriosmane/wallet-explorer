@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KriosMane\WalletExplorer\app\Cryptocurrencies;
+namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
 use Graze\GuzzleHttp\JsonRpc\Client;
 

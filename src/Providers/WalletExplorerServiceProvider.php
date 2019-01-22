@@ -1,9 +1,9 @@
 <?php
 
-namespace KriosMane\WalletExplorer\app\Providers;
+namespace KriosMane\WalletExplorer\Providers;
 
 
-use KriosMane\WalletExplorer\app\WalletExplorer;
+use KriosMane\WalletExplorer\WalletExplorer;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -26,7 +26,7 @@ class WalletExplorerServiceProvider extends ServiceProvider
     {   
 
         
-        $config = realpath(__DIR__.'/../../config/walletexplorer.php');
+        $config = realpath(__DIR__.'/../config/walletexplorer.php');
 
         $this->publishes([
 
