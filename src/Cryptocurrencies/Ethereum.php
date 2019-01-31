@@ -18,7 +18,8 @@ class Ethereum extends Crypto {
     /**
      * 
      */
-    protected $url = 'https://api.etherscan.io/api?module=account&action=balance&address=%s&tag=latest&apikey=';
+    //protected $url = 'https://api.etherscan.io/api?module=account&action=balance&address=%s&tag=latest&apikey=';
+    protected $url = 'https://api.etherscan.io/api';
 
     /**
      * {@inheritdoc}
@@ -28,11 +29,20 @@ class Ethereum extends Crypto {
         
         $api_key = config('walletexplorer.keys.etherscan');
 
-        $this->url = $this->url.$api_key;
+        $params = [
 
-        $response = $this->call($arguments);
+            'module'  => 'account',
+            'action'  => 'balance',
+            'address' => $arguments,
+            'tag'     => 'latest',
+            'apikey'  =>  $api_key
+
+        ];
+        
+        $response = $this->call($arguments, $params);
 
         
+        $this->http_client->setDebug(false);
 
         if(!$response){
 

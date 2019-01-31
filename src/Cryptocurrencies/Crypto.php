@@ -183,7 +183,7 @@ abstract class Crypto implements CryptoInterface {
          * init http client
         */
         $this->http_client = $wallet_client;
-        
+
         /**
          * init explorer response
          */
