@@ -32,6 +32,8 @@ class Ethereum extends Crypto {
 
         $response = $this->call($arguments);
 
+        
+
         if(!$response){
 
             return $response;
@@ -39,6 +41,12 @@ class Ethereum extends Crypto {
         }
 
         $response = json_decode($response->getBody()->getContents(), true);
+
+        if($response['status'] == 0) {
+
+            return false;
+
+        }
 
         $received = ($response['result']);
 

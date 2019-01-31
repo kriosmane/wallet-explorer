@@ -29,8 +29,17 @@ class Akroma extends Crypto {
     public function handle($arguments)
     {
         
-        $this->http_client = Client::factory($this->url);
+        $this->http_client = Client::factory($this->url, 
+            
+            [
+                'verify' => $this->http_client->getVerify(),
+                
+                'debug'  => $this->http_client->getDebug()
+            ]
 
+        );
+
+        
         $response = $this->http_client->send($this->http_client->request(rand(), 'eth_getBalance', [$arguments, 'latest']));
 
         $result = $response->getRpcResult();

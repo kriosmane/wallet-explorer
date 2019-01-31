@@ -3,6 +3,7 @@
 namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
 use KriosMane\WalletExplorer\WalletExplorer;
+use KriosMane\WalletExplorer\WalletClient;
 
 use KriosMane\WalletExplorer\Exceptions\WalletExplorerSDKException;
 
@@ -22,6 +23,11 @@ class CryptoBus {
      */
     protected $wallet;
 
+    /**
+     * @var WalletClient
+     */
+    protected $client; 
+
 
     /**
      * Instantiate Crypto Bus.
@@ -30,9 +36,11 @@ class CryptoBus {
      *
      * @throws TelegramSDKException
      */
-    public function __construct(WalletExplorer $wallet)
+    public function __construct(WalletExplorer $wallet, WalletClient $client)
     {
         $this->wallet = $wallet;
+
+        $this->client = $client;
     }
 
     /**
@@ -82,7 +90,7 @@ class CryptoBus {
 
             } else {
 
-                $crypto = new $crypto();
+                $crypto = new $crypto($this->client);
 
             }
         }
@@ -116,6 +124,14 @@ class CryptoBus {
     public function getCryptos()
     {
         return $this->cryptos;
+    }
+
+    /**
+     * 
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 
     /**

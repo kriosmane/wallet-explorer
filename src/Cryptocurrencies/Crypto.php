@@ -3,6 +3,7 @@
 namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
 use KriosMane\WalletExplorer\ExplorerResponse;
+use KriosMane\WalletExplorer\WalletClient;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -37,14 +38,9 @@ abstract class Crypto implements CryptoInterface {
     protected $url = '';
 
     /**
-     * @var GuzzleHttp\Client
+     * @var KriosMane\WalletExplorer\WalletClient
      */
     protected $http_client = '';
-
-    /**
-     * @var \Goutte\Client
-     */
-    protected $crawler = '';
 
     /**
      * @var KriosMane\WalletExplorer\ExplorerResponse
@@ -177,47 +173,17 @@ abstract class Crypto implements CryptoInterface {
         return $this->explore_response;
     }
 
-    /**
-     * Set verify attribute
-     * @param boolean $verify
-     * @return void
-     */
-    public function setVerify($verify)
-    {
-        $this->verify = $verify;
-    }
-
-    /**
-     * Get verify attribute
-     * @return boolean
-     */
-    public function getVerify()
-    {
-        return $this->verify;
-    }
 
     /**
      * 
      */
-    public function __construct() {
+    public function __construct(WalletClient $wallet_client) {
 
         /**
          * init http client
-         */
-        $this->http_client = new Client([
-            
-            'verify' => $this->verify
+        */
+        $this->http_client = $wallet_client;
         
-        ]);
-        
-        /**
-         * init crawler client 
-         * needed for some explorers
-         */
-        $this->crawler = new \Goutte\Client();
-
-        $this->crawler->setClient($this->http_client);
-
         /**
          * init explorer response
          */

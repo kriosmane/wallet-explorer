@@ -4,6 +4,7 @@ namespace KriosMane\WalletExplorer;
 
 use Illuminate\Contracts\Container\Container;
 
+use KriosMane\WalletExplorer\WalletClient;
 use KriosMane\WalletExplorer\Cryptocurrencies\CryptoBus;
 use KriosMane\WalletExplorer\Cryptocurrencies\CryptoInterface;
 
@@ -19,6 +20,24 @@ class WalletExplorer {
      */
     protected $crypto_bus = null;
 
+    /**
+     * 
+     */
+    protected $client = null;
+
+
+    /**
+     * 
+     */
+    public function getClient()
+    {
+        if (is_null($this->client )) {
+            
+            return $this->client = new WalletClient();
+        }
+
+        return $this->client;
+    }
 
     /**
      * Returns SDK's Crypto Bus.
@@ -29,7 +48,7 @@ class WalletExplorer {
     {
         if (is_null($this->crypto_bus )) {
 
-            return $this->crypto_bus = new CryptoBus($this);
+            return $this->crypto_bus = new CryptoBus($this, $this->getClient());
         }
 
         return $this->crypto_bus;
@@ -87,7 +106,8 @@ class WalletExplorer {
      * @return 
      */
     public function getBalance($symbol, $address)
-    {
+    {   
+        
         $explorer = $this->getCryptoBus()->handler($symbol, $address);
 
         if($explorer !== false){
