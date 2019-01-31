@@ -9,9 +9,9 @@ Simple package for interacting with commons crypto wallet explorer
 To get the latest version simply run the code below in your project.
 
 ```
-composer require krios-mane/wallet-explorer
+composer require kriosmane/wallet-explorer
 ```
-Once is installed, You need to register the service provider. Open up `config/app.php` and add the following to the `providers` key.
+Once is installed, you need to register the service provider: open up `config/app.php` and add the following to the `providers` key.
 
 ```php
 'providers' => [
@@ -20,8 +20,7 @@ Once is installed, You need to register the service provider. Open up `config/ap
     ...
 ]
 ```
-
-Also, register the Facade like so:
+Also, register the facade like so:
 
 ```php
 'aliases' => [
@@ -41,16 +40,13 @@ php artisan vendor:publish --provider="KriosMane\WalletExplorer\Providers\Wallet
 
 A configuration-file named `walletexpolorer.php` with default settings will be placed in your `config` directory
 
-
 ## Usage
 Add the following line to your controller
 ```php
 
 use \WalletExplorer;
 
-...
 $balance = WalletExplorer::getBalance('BTC', '3JZq4atUahhuA9rLhXLMhhTo133J9rF97j');
-...
 
 ```
 
