@@ -72,7 +72,13 @@ class WalletClient {
      */
     public function __construct() {
 
-        $this->http_client  = new Client([]);
+        $this->http_client  = new Client([
+            
+            'verify' => $this->getVerify(),
+
+            'debug' => $this->getDebug()
+
+        ]);
 
         $this->crawler = new \Goutte\Client();
 

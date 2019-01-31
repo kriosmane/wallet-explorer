@@ -28,8 +28,13 @@ class BitcoinMonster extends Crypto {
      */
     public function handle($arguments)
     {
-        
-        $response = $this->http_client->getCrawler()->request('GET', sprintf($this->url, $arguments));
+    
+        $response = $this->http_client->getCrawler()->request('GET', sprintf($this->url, $arguments), 
+            [
+                'verify' => $this->http_client->getVerify(),
+                
+                'debug'  => $this->http_client->getDebug()
+            ]);
 
         /**
          * index 0 TOTAL SENT
