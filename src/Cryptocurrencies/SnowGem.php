@@ -19,7 +19,7 @@ class SnowGem extends Crypto {
     /**
      * 
      */
-    protected $url = 'https://insight.snowgem.org/api/addr/%s';
+    protected $url = 'https://explorer.snowgem.org/api/addr/%s/?noTxList=1';
 
     /**
      * 
