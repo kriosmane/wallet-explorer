@@ -19,6 +19,7 @@
             KriosMane\WalletExplorer\Cryptocurrencies\BitcoinPrivate::class,
             KriosMane\WalletExplorer\Cryptocurrencies\Dash::class,
             KriosMane\WalletExplorer\Cryptocurrencies\Decred::class,
+            KriosMane\WalletExplorer\Cryptocurrencies\DigiByte::class,
             KriosMane\WalletExplorer\Cryptocurrencies\Dogecoin::class,
             KriosMane\WalletExplorer\Cryptocurrencies\Ellaism::class,
             KriosMane\WalletExplorer\Cryptocurrencies\EthereumClassic::class,
