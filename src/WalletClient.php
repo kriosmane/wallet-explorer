@@ -65,7 +65,7 @@ class WalletClient {
     /**
      * @var integer
      */
-    protected $connection_timeout;
+    protected $connection_timeout = 60;
 
     /**
      * 
@@ -76,7 +76,9 @@ class WalletClient {
             
             'verify' => $this->getVerify(),
 
-            'debug' => $this->getDebug()
+            'debug' => $this->getDebug(),
+
+            'timeout' => $this->connection_timeout
 
         ]);
 
