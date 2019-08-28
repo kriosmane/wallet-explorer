@@ -19,7 +19,9 @@ class Pirl extends Crypto {
     /**
      * 
      */
-    protected $url = 'http://pirl.minerpool.net/api/accounts/%s';
+    //protected $url = 'http://pirl.minerpool.net/api/accounts/%s';
+    protected $url = 'http://192.95.33.152/api?module=account&action=balance&address=%s';
+
 
     /**
      * {@inheritdoc}
@@ -28,7 +30,14 @@ class Pirl extends Crypto {
     {
         
 
-        $response = $this->call($arguments);
+        $params = [
+
+            'module' => 'account',
+            'action' => 'balance',
+            'address' => $arguments
+        ];
+
+        $response = $this->http_client->request('GET', 'http://192.95.33.152/api', $params);
 
         if(!$response){
 
@@ -38,10 +47,9 @@ class Pirl extends Crypto {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
+        $balance = $response['result'];
 
-        $balance = $response['stats']['paid'];
-
-        $decimals = 9;
+        $decimals = 18;
 
         $shift = intval(strlen($balance) - $decimals);
 
