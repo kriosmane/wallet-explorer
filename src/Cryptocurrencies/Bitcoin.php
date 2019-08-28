@@ -19,12 +19,42 @@ class Bitcoin extends Crypto {
     /**
      * 
      */
-    protected $url = 'https://chain.so/api/v2/get_address_balance/BTC/%s';
+    protected $url = 'https://api-r.bitcoinchain.com/v1/address/%s';
 
     /**
      * 
      */
-    protected $balance_response_path = 'data.confirmed_balance';
+    protected $balance_response_path = 'balance';
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handle($arguments)
+    {
+        
+        $response = $this->call($arguments);
+
+
+        if(!$response){
+
+            return false;
+
+        }
+
+        $response = json_decode($response->getBody()->getContents(), true);
+        
+        if(isset($response[0]['balance']))
+        {
+            $this->explorer_response->setBalance($response[0]['balance']);
+
+            return $this->explorer_response;
+        }
+
+        return false;
+
+    }
+
 
 
 }
