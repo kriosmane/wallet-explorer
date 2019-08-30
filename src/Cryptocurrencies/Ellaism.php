@@ -3,8 +3,7 @@
 
 namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
-
-
+use Exception;
 
 class Ellaism extends Crypto {
 
@@ -39,42 +38,32 @@ class Ellaism extends Crypto {
             'addr' => $arguments
         ];
 
-        $response = $this->http_client->request('POST', $this->url, $params);
+        try {
+            
+            $response = $this->http_client->request('POST', $this->url, $params);
 
+            if(!$response){
 
-        if(!$response){
+                return $response;
 
-            return $response;
+            }
 
-        }
+            $response = json_decode($response->getBody()->getContents(), true);
 
-        $response = json_decode($response->getBody()->getContents(), true);
+            if(isset($response['balance']))
+            {
+                $this->explorer_response->setBalance($response['balance']);
 
-        if(isset($response['balance']))
-        {
-            $this->explorer_response->setBalance($response['balance']);
+                return $this->explorer_response;
+            }
 
-            return $this->explorer_response;
-        }
-        
-        /*
-        $response = $this->call($arguments);
-
-        if(!$response){
-
+        } catch (Exception $e) {
+           
             return false;
 
         }
 
-        preg_match("/Balance:<\/td><td>([0-9.]+)/", $response->getBody()->getContents(), $matches);
-
-        $balance = isset($matches[1]) ? $matches[1] : 0;
-
-        $this->explorer_response->setBalance($balance);
-
-        return $this->explorer_response;
-
-        */
+        
 
     }
 

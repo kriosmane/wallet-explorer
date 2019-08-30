@@ -3,7 +3,9 @@
 
 namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
+use Exception;
 use Graze\GuzzleHttp\JsonRpc\Client;
+use GuzzleHttp\Exception\ConnectException;
 
 
 class Akroma extends Crypto {
@@ -21,7 +23,8 @@ class Akroma extends Crypto {
     /**
      * 
      */
-    protected $url = 'https://remote.akroma.io';
+    protected $url = 'https://blocks.akroma.wattpool.net/web3relay';
+    
 
     /**
      * {@inheritdoc}
@@ -29,33 +32,38 @@ class Akroma extends Crypto {
     public function handle($arguments)
     {
         
-        $this->http_client = Client::factory($this->url, 
+        $params = [
+            'options' => array ('balance'),
+            'addr' => $arguments
+        ];
+
+        try {
             
-            [
-                'verify' => $this->http_client->getVerify(),
-                
-                'debug'  => $this->http_client->getDebug()
-            ]
+            $response = $this->http_client->request('POST', $this->url, $params);
 
-        );
+            if(!$response){
 
-        
-        $response = $this->http_client->send($this->http_client->request(rand(), 'eth_getBalance', [$arguments, 'latest']));
+                return $response;
 
-        $result = $response->getRpcResult();
+            }
 
-        if (strpos($result, "0x") === 0) {
+            $response = json_decode($response->getBody()->getContents(), true);
 
-            $result = str_replace("0x", '', $result);
+            if(isset($response['balance']))
+            {
+                $this->explorer_response->setBalance($response['balance']);
+
+                return $this->explorer_response;
+            }
+
+        } catch (Exception $e) {
+            
+            return false;
+
         }
 
-        $result = hexdec ($result);
-
-        $balance = $result/1000000000000000000;
-
-        $this->explorer_response->setBalance($balance);
-
-        return $this->explorer_response;
+        
+        
 
     }
 
