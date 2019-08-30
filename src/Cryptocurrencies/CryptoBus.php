@@ -153,7 +153,11 @@ class CryptoBus {
 
         $crypto = $this->cryptos[$crypto_symbol];
 
-        return $crypto->handle($address);
+        $crypto->setWalletAddress($address);
+
+        $crypto->make();
+
+        return $crypto->handle();
 
     }
 

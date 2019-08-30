@@ -18,40 +18,41 @@ class Ethereum extends Crypto {
     /**
      * 
      */
-    //protected $url = 'https://api.etherscan.io/api?module=account&action=balance&address=%s&tag=latest&apikey=';
     protected $url = 'https://api.etherscan.io/api';
 
     /**
-     * {@inheritdoc}
+     * 
      */
-    public function handle($arguments)
-    {
-        
+    protected $address_in_url = false;
+
+    /**
+     * 
+     */
+    protected $params = array(
+
+        'module'  => 'account',
+        'action'  => 'balance',
+        'tag'     => 'latest',
+
+    );
+
+    /**
+     * 
+     */
+    public function make()
+    {  
         $api_key = config('walletexplorer.keys.etherscan');
 
-        $params = [
-
-            'module'  => 'account',
-            'action'  => 'balance',
-            'address' => $arguments,
-            'tag'     => 'latest',
-            'apikey'  =>  $api_key
-
-        ];
+        $this->params['address'] = $this->wallet_address; 
         
-        $response = $this->call($arguments, $params);
+        $this->params['apikey'] =  $api_key; 
+    }
 
-        
-        $this->http_client->setDebug(false);
-
-        if(!$response){
-
-            return $response;
-
-        }
-
-        $response = json_decode($response->getBody()->getContents(), true);
-
+    /**
+     * 
+     */
+    public function processResponse($response)
+    {
         if($response['status'] == 0) {
 
             return false;
@@ -69,7 +70,6 @@ class Ethereum extends Crypto {
         $this->explorer_response->setBalance($received);
 
         return $this->explorer_response;
-
     }
 
 

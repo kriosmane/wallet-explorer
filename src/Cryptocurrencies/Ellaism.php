@@ -20,51 +20,38 @@ class Ellaism extends Crypto {
     /**
      * 
      */
-    //protected $url = 'https://explorer.ellaism.org/account/%s';
-
     protected $url = 'https://limax-explorer.outdoordevs.com/web3relay';
 
-    
+    /**
+     * 
+     */
+    protected $type = 'POST';
 
     /**
-     * {@inheritdoc}
+     * 
      */
-    public function handle($arguments)
-    {
+    protected $address_in_url = false;
 
+    /**
+     * 
+     */
+    protected $params = array(
 
-        $params = [
-            'options' => array ('balance'),
-            'addr' => $arguments
-        ];
+        'options' => array('balance')
 
-        try {
-            
-            $response = $this->http_client->request('POST', $this->url, $params);
+    );
 
-            if(!$response){
+    /**
+     * 
+     */
+    protected $balance_response_path = 'balance';
 
-                return $response;
-
-            }
-
-            $response = json_decode($response->getBody()->getContents(), true);
-
-            if(isset($response['balance']))
-            {
-                $this->explorer_response->setBalance($response['balance']);
-
-                return $this->explorer_response;
-            }
-
-        } catch (Exception $e) {
-           
-            return false;
-
-        }
-
-        
-
+    /**
+     * 
+     */
+    public function make()
+    {  
+       $this->params['addr'] = $this->wallet_address; 
     }
 
 

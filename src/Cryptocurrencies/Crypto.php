@@ -32,10 +32,33 @@ abstract class Crypto implements CryptoInterface {
     protected $description = '';
 
     /**
+     * crypto's wallet explorer
+     * @var string 
+     */
+    protected $wallet_address = '';
+
+    /**
      * Explorer's url
      * @var string
      */
     protected $url = '';
+
+    /**
+     * Call params
+     * @var array
+     */
+    protected $params = array();
+
+    /**
+     * call method type
+     * @var string
+     */
+    protected $type = 'GET';
+
+    /**
+     * 
+     */
+    protected $address_in_url = true;
 
     /**
      * @var KriosMane\WalletExplorer\WalletClient
@@ -114,6 +137,25 @@ abstract class Crypto implements CryptoInterface {
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set crypto's wallet address
+     * @param string $wallet_address
+     * @return void
+     */
+    public function setWalletAddress($wallet_address)
+    {
+        $this->wallet_address = $wallet_address;
+    }
+
+    /**
+     * get crypto's wallet address
+     * @return string $wallet_address
+     */
+    public function getWalletAddress()
+    {
+        return $this->wallet_address;
     }
 
     /**
@@ -199,10 +241,10 @@ abstract class Crypto implements CryptoInterface {
     /**
      *  Method ovveridable by single crypto class
      */
-    public function handle($address)
+    public function handle()
     {
 
-        $response = $this->call($address);
+        $response = $this->call();
         
         if(!$response){
 
@@ -212,6 +254,18 @@ abstract class Crypto implements CryptoInterface {
 
         $response = json_decode($response->getBody()->getContents(), true);
 
+        
+        $this->processResponse($response);
+
+        
+        return $this->explorer_response;
+    }
+
+    /**
+     * look for and set wallet balance
+     */
+    public function processResponse($response)
+    {
         /**
          * look for and set wallet balance
          */
@@ -220,28 +274,30 @@ abstract class Crypto implements CryptoInterface {
             $this->explorer_response->setBalance(array_get($response, $this->balance_response_path));
 
         }
-        
-        return $this->explorer_response;
     }
 
     /**
      * Call coin's explorer web service
      * @param string $address
-     * @param array $params
-     * @param string $type GET|POST
      * 
      * @return boolean|response
      */
-    public function call($address, $params = [], $type = 'GET')
+    public function call()
     {
 
-        $this->explorer_response->setAddress($address);
+        $this->explorer_response->setAddress($this->wallet_address);
 
-        $endpoint = sprintf($this->url, $address);
-        
+        $endpoint = $this->url;
+
+        if($this->address_in_url)
+        {
+            $endpoint = sprintf($this->url, $this->wallet_address);
+        }
+
+
         try{
             
-            $request = $this->http_client->request($type, $endpoint, $params);
+            $request = $this->http_client->request($this->type, $endpoint, $this->params);
             
             return $request;
         

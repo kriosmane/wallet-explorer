@@ -19,34 +19,41 @@ class Pirl extends Crypto {
     /**
      * 
      */
-    //protected $url = 'http://pirl.minerpool.net/api/accounts/%s';
-    protected $url = 'http://192.95.33.152/api?module=account&action=balance&address=%s';
-
+    protected $url = 'http://192.95.33.152/api';
 
     /**
-     * {@inheritdoc}
+     * 
      */
-    public function handle($arguments)
+    protected $type = 'POST';
+
+    /**
+     * 
+     */
+    protected $address_in_url = false;
+
+    /**
+     * 
+     */
+    protected $params = array(
+
+        'module' => 'account',
+        'action' => 'balance',
+
+    );
+
+    /**
+     * 
+     */
+    public function make()
+    {  
+       $this->params['address'] = $this->wallet_address; 
+    }
+
+    /**
+     * 
+     */
+    public function processResponse($response)
     {
-        
-
-        $params = [
-
-            'module' => 'account',
-            'action' => 'balance',
-            'address' => $arguments
-        ];
-
-        $response = $this->http_client->request('GET', 'http://192.95.33.152/api', $params);
-
-        if(!$response){
-
-            return $response;
-
-        }
-
-        $response = json_decode($response->getBody()->getContents(), true);
-
         $balance = $response['result'];
 
         $decimals = 18;
@@ -58,7 +65,6 @@ class Pirl extends Crypto {
         $this->explorer_response->setBalance($balance);
 
         return $this->explorer_response;
-
     }
 
 

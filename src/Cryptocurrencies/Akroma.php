@@ -24,47 +24,37 @@ class Akroma extends Crypto {
      * 
      */
     protected $url = 'https://blocks.akroma.wattpool.net/web3relay';
-    
 
     /**
-     * {@inheritdoc}
+     * 
      */
-    public function handle($arguments)
-    {
-        
-        $params = [
-            'options' => array ('balance'),
-            'addr' => $arguments
-        ];
+    protected $type = 'POST';
 
-        try {
-            
-            $response = $this->http_client->request('POST', $this->url, $params);
+    /**
+     * 
+     */
+    protected $address_in_url = false;
 
-            if(!$response){
+    /**
+     * 
+     */
+    protected $params = array(
 
-                return $response;
+        'options' => array('balance')
 
-            }
+    );
 
-            $response = json_decode($response->getBody()->getContents(), true);
+    /**
+     * 
+     */
+    protected $balance_response_path = 'balance';
 
-            if(isset($response['balance']))
-            {
-                $this->explorer_response->setBalance($response['balance']);
-
-                return $this->explorer_response;
-            }
-
-        } catch (Exception $e) {
-            
-            return false;
-
-        }
-
-        
-        
-
+    /**
+     * 
+     */
+    public function make()
+    {  
+       $this->params['addr'] = $this->wallet_address; 
     }
 
 

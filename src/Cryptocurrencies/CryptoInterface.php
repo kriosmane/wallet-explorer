@@ -25,5 +25,5 @@ interface CryptoInterface
      *
      * @return mixed
      */
-    public function handle($arguments);
+    public function handle();
 }

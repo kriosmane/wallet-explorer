@@ -30,11 +30,11 @@ class BitcoinMonster extends Crypto {
     /**
      * {@inheritdoc}
      */
-    public function handle($arguments)
+    public function handle()
     {
         
         try{
-        $response = $this->http_client->getCrawler()->request('GET', sprintf($this->url, $arguments), 
+        $response = $this->http_client->getCrawler()->request('GET', sprintf($this->url, $this->wallet_address), 
             [
                 'verify' => $this->http_client->getVerify(),
                 
