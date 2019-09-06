@@ -18,12 +18,39 @@ class EthereumClassic extends Crypto {
     /**
      * 
      */
-    protected $url = 'https://api.gastracker.io/addr/%s';
+    protected $url = 'https://etcblockexplorer.com/web3relay';
 
     /**
      * 
      */
-    protected $balance_response_path = 'balance.ether';
+    protected $type = 'POST';
+
+    /**
+     * 
+     */
+    protected $address_in_url = false;
+
+    /**
+     * 
+     */
+    protected $params = array(
+
+        'options' => array('balance')
+
+    );
+
+    /**
+     * 
+     */
+    protected $balance_response_path = 'balance';
+
+    /**
+     * 
+     */
+    public function make()
+    {  
+       $this->params['addr'] = $this->wallet_address; 
+    }
 
 }
 
