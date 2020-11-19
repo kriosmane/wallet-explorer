@@ -1,6 +1,5 @@
 <?php
 
-
 namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
 use Exception;
@@ -20,39 +19,12 @@ class Ellaism extends Crypto {
     /**
      * 
      */
-    protected $url = 'https://limax-explorer.outdoordevs.com/web3relay';
-
-    /**
-     * 
-     */
-    protected $type = 'POST';
-
-    /**
-     * 
-     */
-    protected $address_in_url = false;
-
-    /**
-     * 
-     */
-    protected $params = array(
-
-        'options' => array('balance')
-
-    );
+    protected $url = 'https://explorer.ellaism.io/api/address/%s';
 
     /**
      * 
      */
     protected $balance_response_path = 'balance';
-
-    /**
-     * 
-     */
-    public function make()
-    {  
-       $this->params['addr'] = $this->wallet_address; 
-    }
 
 
 }
