@@ -24,7 +24,7 @@ class Bitcoin extends Crypto {
     /**
      * 
      */
-    protected $balance_response_path = 'data.confirmetd_balance';
+    protected $balance_response_path = 'data.confirmed_balance';
 
 
 }
