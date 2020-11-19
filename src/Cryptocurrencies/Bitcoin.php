@@ -19,12 +19,12 @@ class Bitcoin extends Crypto {
     /**
      * 
      */
-    protected $url = 'https://insight.bitpay.com/api/addr/%s/?noTxList=1';
+    protected $url = 'https://sochain.com/api/v2/get_address_balance/BTC/%s';
 
     /**
      * 
      */
-    protected $balance_response_path = 'balance';
+    protected $balance_response_path = 'data.confirmetd_balance';
 
 
 }
