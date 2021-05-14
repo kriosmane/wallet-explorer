@@ -3,10 +3,6 @@
 
 namespace KriosMane\WalletExplorer\Cryptocurrencies;
 
-use Exception;
-use Graze\GuzzleHttp\JsonRpc\Client;
-use GuzzleHttp\Exception\ConnectException;
-
 
 class Akroma extends Crypto {
 
