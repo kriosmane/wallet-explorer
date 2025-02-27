@@ -1,3 +1,6 @@
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/kriosmane/wallet-explorer.svg?style=flat-square)](https://packagist.org/packages/kriosmane/wallet-explorer)
+[![Total Downloads](https://img.shields.io/packagist/dt/kriosmane/wallet-explorer.svg?style=flat-square)](https://packagist.org/packages/kriosmane/wallet-explorer)
+
 # Laravel Crypto Wallet Explorer
 Simple package for interacting with commons crypto wallet explorer
 
